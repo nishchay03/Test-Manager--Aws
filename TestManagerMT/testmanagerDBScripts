@@ -1,0 +1,54 @@
+------------------ CREATE ----------------------
+
+
+CREATE TABLE `testmanagerDB`.`Projects` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NOT NULL,
+  `description` VARCHAR(400) NOT NULL,
+  `owner` VARCHAR(256) NULL DEFAULT 'admin',
+  `rate` INT NULL DEFAULT 0,
+  `startDate` DOUBLE NULL,
+  `endDate` DOUBLE NULL,
+  `hours` INT NULL,
+  PRIMARY KEY (`id`));
+  
+  
+  CREATE TABLE `testmanagerDB`.`TestCases` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) NULL,
+  `description` VARCHAR(400) NULL,
+  `owner` VARCHAR(100) NULL,
+  `createdAt` DOUBLE NULL,
+  `projectId` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `projectId`
+    FOREIGN KEY (`projectId`)
+    REFERENCES `testmanagerDB`.`Projects` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+    
+    
+ CREATE TABLE `testmanagerDB`.`Bugs` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `priority` VARCHAR(45) NULL,
+  `type` VARCHAR(45) NULL,
+  `createdAt` DOUBLE NULL,
+  `reporter` VARCHAR(45) NULL,
+  `assignedTo` VARCHAR(45) NULL,
+  `name` VARCHAR(200) NULL,
+  `description` VARCHAR(400) NULL,
+  `bugProjectId` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `bugProjectId`
+    FOREIGN KEY (`bugProjectId`)
+    REFERENCES `testmanagerDB`.`Projects` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+ 
+    
+    
+---------------- READ -----------------------
+  SELECT * FROM testmanagerDB.Projects;
+  SELECT * FROM testManagerDB.TestCases;
+  SELECT * FROM testManagerDB.Bugs;
+  
